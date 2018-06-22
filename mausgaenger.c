@@ -22,6 +22,7 @@ int mouse(void) {
   return 0;
 }
 
+#pragma weak main
 int main (int argc, char** argv) {
   return mouse();
 }

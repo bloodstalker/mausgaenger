@@ -11,7 +11,7 @@ SRCS=$(wildcard *.c)
 
 .PHONY:all clean help
 
-all:$(TARGET)
+all:$(TARGET) $(TARGET).wasm
 
 depend:.depend
 
@@ -24,11 +24,14 @@ depend:.depend
 .c.o:
 	$(CC) $(CC_FLAGS) -c $< -o $@ 
 
+%.wasm:%.c
+	./llvm.wasm.sh $<
+
 $(TARGET): $(TARGET).o
 	$(CC) $^ $(LD_FLAGS) -o $@
 
 clean:
-	rm -f *.o *~ $(TARGET)
+	rm -f *.o *~ $(TARGET) *.s *.wasm *.wast *.bc
 	rm .depend
 
 help:
