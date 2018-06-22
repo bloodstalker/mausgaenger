@@ -1,0 +1,7 @@
+[
+    {
+        "command": "cc -c -o mausgaenger.o mausgaenger.c", 
+        "directory": "/home/bloodstalker/extra/mausgaenger", 
+        "file": "/home/bloodstalker/extra/mausgaenger/mausgaenger.c"
+    }
+]
