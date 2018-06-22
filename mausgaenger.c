@@ -5,14 +5,19 @@
 #include <linux/input.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include <unistd.h>
 
-#define MOUSEFILE "/dev/input/event6"
+//#define MOUSEFILE "/dev/input/event6"
+#define MOUSEFILE "/dev/input/event"
 
-int mouse(void) {
+int mouse(char* _id) {
+  char path[100] = {0};
+  strcat(path, MOUSEFILE);
+  strcat(path, _id);
   int fd;
   struct input_event ie;
-  if ((fd = open(MOUSEFILE, O_RDONLY)) == -1) {
+  if ((fd = open(path, O_RDONLY)) == -1) {
     perror("opening device failed.");
     exit(EXIT_FAILURE);
   }
@@ -24,5 +29,9 @@ int mouse(void) {
 
 #pragma weak main
 int main (int argc, char** argv) {
-  return mouse();
+  if (argc != 2) {
+    printf("event id not provided!\n");
+    exit(EXIT_FAILURE);
+  }
+  return mouse(argv[1]);
 }

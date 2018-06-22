@@ -1,8 +1,9 @@
 function mouse() {
   const fs = require("fs")
   const buf = fs.readFileSync("./mausgaenger.wasm")
-  const lib_mouse = Wasm.instantiateModule(new Uint8Array(buf)).exports
-  lib.mouse()
+  //const lib_mouse = WebAssembly.instantiate(new Uint8Array(buf)).exports
+  const lib_mouse = WebAssembly.instantiate()
+  lib_mouse.mouse()
 }
 
 mouse()
