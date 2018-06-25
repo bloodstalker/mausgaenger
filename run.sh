@@ -1,7 +1,9 @@
-#!bin/bash
-if [[ "$1" == proc ]];then 
+#!/usr/bin/bash
+if [[ "$1" == proc ]];then
   cat /proc/bus/input/devices
   exit $?
 fi
-"./mausgaenger"
+make clean
+make
+"node" mouse.js
 

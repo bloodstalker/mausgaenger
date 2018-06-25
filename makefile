@@ -1,7 +1,7 @@
 TARGET=mausgaenger
 CC=clang
 CC?=clang
-CC_FLAGS=
+CC_FLAGS=-fPIC
 CC_EXTRA?=
 CC_FLAGS+=$(CC_EXTRA)
 
@@ -11,7 +11,7 @@ SRCS=$(wildcard *.c)
 
 .PHONY:all clean help
 
-all:$(TARGET) $(TARGET).wasm
+all:$(TARGET) $(TARGET).wasm $(TARGET).so
 
 depend:.depend
 
@@ -30,8 +30,11 @@ depend:.depend
 $(TARGET): $(TARGET).o
 	$(CC) $^ $(LD_FLAGS) -o $@
 
+$(TARGET).so:$(TARGET).o
+	$(CC) $^ $(LD_FLAGS) -shared -o $@
+
 clean:
-	rm -f *.o *~ $(TARGET) *.s *.wasm *.wast *.bc
+	rm -f *.o *~ $(TARGET) *.s *.wasm *.wast *.bc *.so
 	rm .depend
 
 help:

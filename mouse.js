@@ -33,8 +33,18 @@ function screenshot(address, destination) {
   })
 }
 
+function mouse() {
+  process.argv.forEach(function(val, index, array) {console.log(index + ":" + val)})
+  const ffi = require("./node-ffi/lib/ffi")
+  const ref = require("ref")
+  const sudo = require("sudo-js")
+  const fs = require("fs")
+  var f_contents = fs.readFileSync("./data.json")
+  var j_contents = JSON.parse(f_contents)
+  sudo.setPassword(j_contents.password)
+  var command_watch = ["./mausgaenger", "6", "./out", "./outb"]
+  var command_dupe = ["./mausgaenger", "6", "./out", "./outb"]
+  sudo.exec(command_watch, function(err, pid, result){console.log(result)})
+}
 
-//demo1("http://slimerjs.org")
-//demo2("http://slimerjs.org")
-//screenshot("http://slimerjs.org")
-//screenshot("https://www.ticketmaster.nl/event/official-awakenings-festival-afterparty-tickets/223573?language=en-us", "./screenshot.png")
+mouse()
