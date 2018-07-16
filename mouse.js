@@ -42,7 +42,7 @@ function mouse() {
   var f_contents = fs.readFileSync("./data.json")
   var j_contents = JSON.parse(f_contents)
   sudo.setPassword(j_contents.password)
-  var command_watch = ["./mausgaenger", "6", "./out", "./outb"]
+  var command_watch = ["./mausgaenger", "--event-id", "6", "--out", "./out", "--outb", "./outb"]
   var command_dupe = ["./mausgaenger", "6", "./out", "./outb"]
   sudo.exec(command_watch, function(err, pid, result){console.log(result)})
 }

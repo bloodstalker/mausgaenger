@@ -8,6 +8,7 @@ import signal
 import sys
 import evdev
 from evdev import InputDevice, categorize, ecodes
+from Xlib.ext import xinput
 
 def SigHandler_SIGINT(signum, frame):
     print()
